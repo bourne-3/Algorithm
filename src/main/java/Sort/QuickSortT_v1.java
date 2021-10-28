@@ -1,13 +1,13 @@
 package Sort;
 
 /**
-
+    1 这是看力扣上别人实现的方法
  */
-public class QuickSortT {
+public class QuickSortT_v1 {
 
     public static void main(String[] args) {
         int[] nums = {10, 3, 5, 2, 12};
-        QuickSortT t = new QuickSortT();
+        QuickSortT_v1 t = new QuickSortT_v1();
         int[] res = t.Sort(nums);
         for (int n : res) {
             System.out.print(n + " ");
