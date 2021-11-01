@@ -9,6 +9,8 @@ public class QuickSortT_v2 {
         int[] nums = {10, 3, 5, 2, 12};
 
         QuickSortT_v2 t = new QuickSortT_v2();
+
+        // output
         int[] res = t.Sort(nums);
         for (int n : res) {
             System.out.print(n + " ");
@@ -21,6 +23,7 @@ public class QuickSortT_v2 {
     }
 
     private void QuickSort(int[] nums, int l, int r) {
+        // 左闭右闭区间
         if (l < r){
             int idx = partition(nums, l, r);
             QuickSort(nums, l, idx - 1);
