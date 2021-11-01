@@ -19,7 +19,7 @@ public class MergeSortT {
         if (l >= r) return;
 
         int mid = (l + r) >> 1;
-        mergeSort(nums, l, mid);
+        mergeSort(nums, l, mid);  // 这里不用- 1
         mergeSort(nums, mid + 1, r);
         mergeSortInOrder(nums, l, mid, r);
     }
@@ -35,7 +35,7 @@ public class MergeSortT {
         while (l <= mid) res[count++] = nums[l++];
         while (m <= e) res[count++] = nums[m++];
         for (int i = 0; i < res.length; i++){
-            nums[i + bgn] = res[i];
+            nums[i + bgn] = res[i]; // 这里bgn不可以少
         }
 
     }
