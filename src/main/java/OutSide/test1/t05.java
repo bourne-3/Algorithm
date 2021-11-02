@@ -17,7 +17,6 @@ public class t05 {
         System.out.println(valid);
 
 
-
     }
 
     public boolean isValid(String s) {
