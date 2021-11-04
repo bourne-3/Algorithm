@@ -25,11 +25,11 @@ public class MergeSortT {
     }
 
     private void mergeSortInOrder(int[] nums, int bgn, int mid, int end) {
-        int l = bgn, m = mid + 1, e = end;
+        int l = bgn, m = mid + 1, e = end;  // 这里两个数组的开头，其实可以改为tmp1以及tmp2会更好理解一些
         int[] res = new int[end - bgn + 1];
         int count = 0;
         while (l <= mid && m <= e){
-            if (nums[l] < nums[m]) res[count++] = nums[l++];
+            if (nums[l] <= nums[m]) res[count++] = nums[l++];
             else res[count++] = nums[m++];
         }
         while (l <= mid) res[count++] = nums[l++];
