@@ -38,7 +38,7 @@ public class QuickSortT_v2 {
             // 这里是与pivot比较
             while (l < r && nums[r] >= pivot) r--;  // 不断的找出比pivot小的数，因此当大于pivot就移动指针
             nums[l] = nums[r];
-            while (l < r && nums[l] <= pivot) l++;
+            while (l < r && nums[l] <= pivot) l++;  // 注意这里是和pivot对比
             nums[r] = nums[l];
         }
         nums[l] = pivot;  // 当两个下标重合，就可以把pivot放过来
