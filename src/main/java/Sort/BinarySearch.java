@@ -1,7 +1,8 @@
 package Sort;
 
 /**
-
+    1 首先看 r 取的值是否获得 nums.length - 1 可以获得， nums.length的话就不可以获得
+        根据此来判断while是否要取 = 号， 以及 l = mid + 1 还是 l = mid
  */
 public class BinarySearch {
 
