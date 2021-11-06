@@ -1,39 +1,42 @@
 package OutSide.test1;
 
-import java.util.HashSet;
-
 /**
 
  */
 public class t02 {
 
     public static void main(String[] args) {
-//        int[] nums = {0,0,1,2,5};
-//        isStraight(nums);
-
-        int i = bitSum(21);
-        System.out.println(i);
+        t02 t = new t02();
+        int[][] nums = {{1,2,3} ,{4,5,6},{7,8,9}};
+        t.spiralOrder(nums);
     }
 
-    public static boolean isStraight(int[] nums) {
-        // 不重复 ||  max - min > 5
-        HashSet<Integer> set = new HashSet<>();
-        int min = Integer.MAX_VALUE, max = Integer.MIN_VALUE;
-        for (int n:nums){
-            if (n == 0) continue;
-            if (set.contains(n)) return false;
-            set.add(n);
-            if (n > max) max = n;
-            if (n < min) min = n;
-        }
-        return max - min < 5;
-    }
+    public int[] spiralOrder(int[][] matrix) {
+        int row = matrix.length;
+        int col = matrix[0].length;
+        int top = 0, bottom = row - 1, left = 0, right = col - 1;
+        int[] res = new int[row * col];
+        int count = 0;
+        while (true){
+            for (int i = left; i <= right; i++) {
+                res[count++] = matrix[top][i];
+            }
+            if (++top > bottom) break;
 
-    static int bitSum(int num){
-        int res = 0;
-        while (num > 0){
-            res += num % 10;
-            num /= 10;
+            for (int i = top; i <= bottom; i++){
+                res[count++] = matrix[i][right];
+            }
+            if (--right < left) break;
+
+            for (int i = right; i >= left; i--){
+                res[count++] = matrix[bottom][i];
+            }
+            if (--bottom < top) break;
+
+            for (int i = bottom; i >= top; i--){
+                res[count++] = matrix[i][left];
+            }
+            if (++left > right) break;
         }
         return res;
     }
