@@ -18,7 +18,7 @@ public class prac9 {
     public static int minArray(int[] numbers) {
         // 定义两个边界 l r
         int l = 0, r = numbers.length - 1;
-        while (l <= r){
+        while (l < r){
             int mid = l + (r - l) / 2;
             if (numbers[mid] < numbers[r]) r = mid;
             else if (numbers[mid] > numbers[r]) l = mid + 1;
