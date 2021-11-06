@@ -8,8 +8,11 @@ import java.util.HashSet;
 public class t02 {
 
     public static void main(String[] args) {
-        int[] nums = {0,0,1,2,5};
-        isStraight(nums);
+//        int[] nums = {0,0,1,2,5};
+//        isStraight(nums);
+
+        int i = bitSum(21);
+        System.out.println(i);
     }
 
     public static boolean isStraight(int[] nums) {
@@ -24,5 +27,14 @@ public class t02 {
             if (n < min) min = n;
         }
         return max - min < 5;
+    }
+
+    static int bitSum(int num){
+        int res = 0;
+        while (num > 0){
+            res += num % 10;
+            num /= 10;
+        }
+        return res;
     }
 }
