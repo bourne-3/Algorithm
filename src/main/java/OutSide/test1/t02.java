@@ -12,6 +12,18 @@ public class t02 {
         t.T01();
     }
 
+
+
+    public int missingNumber(int[] nums) {
+        int l = 0, r = nums.length - 1;
+        while (l <= r){
+            int mid = l + (r-l)/2;
+            if (nums[mid] == mid) l = mid + 1;
+            else r = mid - 1;
+        }
+        return l;
+    }
+
     public int search(int[] nums, int target) {
         // 滑动窗口的思路
         int idx = BSearch(nums,target);
