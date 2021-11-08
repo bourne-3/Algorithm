@@ -26,6 +26,8 @@ public class prac45 {
             }
         }
         char flag = ' ';
+        // 这样做是错的， 应该 仍然对chs做一个增强for循环。 然后将c作为key来进行查找，firstUniqChar2的做法就是对的。
+        // 这里是一个错误示范
         for (char c : map.keySet()){
             // 我知道这里为什么错了，因为keySet出来的是无序的。如果是从chs取出来就可以了
             Integer count = map.get(c);
