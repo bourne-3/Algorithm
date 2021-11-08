@@ -1,31 +1,35 @@
 package CodePoint;
 
-import org.omg.PortableInterceptor.INACTIVE;
-
-import java.util.HashMap;
-
 /**
- 统计一个数字在排序数组中出现的次数。
+ 在排序数组中查找数字 I
+ 一般排序数组 都是使用二分查找，其他都没用。
  */
 public class prac48 {
 
     public static void main(String[] args) {
-        int res = search(new int[]{5, 7, 7, 8, 8, 10}, 8);
-        System.out.println(res);
+
     }
 
-    public static int search(int[] nums, int target) {
-        // 这不是使用一个HashMap就可以解决了吗
+    public int search(int[] nums, int target) {
+        // 滑动窗口的思路
+        int idx = BSearch(nums,target);
+        if (idx == -1) return 0;
+        // 向两边滑动
+        int l = idx, r = idx;
+        // 向左边
+        while (l - 1 >= 0 && nums[l-1] == nums[idx]) l--;
+        while (r + 1 < nums.length && nums[r + 1] == nums[idx]) r++;
+        return r - l + 1;
+    }
 
-        HashMap<Integer, Integer> map = new HashMap<>();
-        for (int i = 0; i < nums.length; i++) {
-            int val = nums[i];
-            if (map.containsKey(val)){
-                map.put(val, map.get(val) + 1);
-            }else {
-                map.put(val, 1);
-            }
+    private int BSearch(int[] nums, int target) {
+        int l = 0, r = nums.length - 1;
+        while (l <= r){
+            int mid = l + (r - l )/ 2;
+            if (nums[mid] < target) l = mid + 1;
+            else if (nums[mid] > target) r = mid - 1;
+            else return mid;
         }
-        return map.get(target);
+        return -1; // 没找到
     }
 }
