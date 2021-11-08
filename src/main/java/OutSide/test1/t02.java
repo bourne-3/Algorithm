@@ -12,6 +12,25 @@ public class t02 {
         t.T01();
     }
 
+    int res;
+    int k;
+    public int kthLargest(TreeNode root, int k) {
+        this.k = k;
+        recur(root);
+        return res;
+    }
+
+    private void recur(TreeNode root) {
+        if (root == null) return;
+        recur(root.right);
+
+        // 业务
+        if (--k == 0){
+            res = root.val;
+        }
+
+        recur(root.left);
+    }
 
 
     public int missingNumber(int[] nums) {
