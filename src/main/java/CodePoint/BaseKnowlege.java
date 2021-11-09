@@ -16,7 +16,7 @@ public class BaseKnowlege {
         // 队列的实验
         Deque<Integer> de = new LinkedList<>();
 
-        // offer 其实就和 offerLast
+        // offer 其实就是 offerLast
         de.offer(1);
         de.offer(2);
         de.offer(3);
