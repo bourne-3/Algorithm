@@ -11,6 +11,27 @@ public class t07 {
 
     }
 
+    public int[][] merge(int[][] intervals) {
+        Arrays.sort(intervals, ((o1, o2) -> Integer.compare(o1[0], o2[0])));
+        int start = intervals[0][0];
+        List<int[]> res = new ArrayList<>();
+        for (int i = 1; i < intervals.length ; i++) {
+            if (intervals[i][0] > intervals[i-1][1]){
+                // 添加
+                res.add(new int[]{start, intervals[i-1][1]});
+                start = intervals[i][0];
+            }else {
+                // 因为这里的i会变成下一次的i-1
+                intervals[i][1] = Math.max(intervals[i-1][1], intervals[i][1]);
+            }
+        }
+        // 收尾
+        res.add(new int[]{start, intervals[intervals.length - 1][1]});
+        int[][] out = res.toArray(new int[res.size() - 1][]);
+        return out;
+    }
+
+
     public int maxSubArray(int[] nums) {
         if (nums.length == 1) return nums[0];
         int[] dp = new int[nums.length];
