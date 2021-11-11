@@ -2,6 +2,8 @@ package CodePoint;
 
 /**
  构建乘积数组
+
+ 可以和接雨水的那道题联系起来。
  */
 public class prac67 {
 

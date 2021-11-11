@@ -5,13 +5,18 @@ package OutSide.test1;
  */
 public class t08 {
 
-    public static void main(String[] args) {
 
-    }
 
     int row, col;
     boolean[][] visited;
     int[][] directions = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+
+    public static void main(String[] args) {
+        char[][] board = {{'A', 'B', 'C' ,'E'},{'S', 'F', 'C' ,'S'},{'A', 'D', 'E' ,'E'}};
+        String words = "ABCCED";
+        t08 t = new t08();
+        t.exist(board, words);
+    }
 
     public boolean exist(char[][] board, String word) {
         row = board.length;
@@ -28,6 +33,9 @@ public class t08 {
     }
 
     private boolean dfs(int i, int j, char[][] board, char[] chs, int len) {
+        // 符合条件
+        if (len == chs.length) return true;
+
         if (i < 0 || i >= row || j < 0 || j >= col || visited[i][j] || chs[len] != board[i][j]) return false;
         visited[i][j] = true;
         for (int[] d:directions){

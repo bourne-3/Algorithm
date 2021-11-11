@@ -1,5 +1,8 @@
 package OutSide.test1;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
 
  */
@@ -9,6 +12,25 @@ public class t01 {
         t01 t = new t01();
         int[] nums = {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};
         t.trap(nums);
+    }
+
+
+
+
+    List<Integer> res = new ArrayList<>();
+    public List<Integer> inorderTraversal(TreeNode root) {
+        dfs(root);
+        return res;
+    }
+
+    private void dfs(TreeNode root) {
+        if (root == null) return;
+        dfs(root.left);
+
+        // 业务
+        res.add(root.val);
+
+        dfs(root.right);
     }
 
 
