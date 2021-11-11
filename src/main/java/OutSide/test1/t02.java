@@ -10,17 +10,47 @@ public class t02 {
     public static void main(String[] args) {
 
     }
-    public boolean hasCycle(ListNode head) {
 
+    public ListNode detectCycle(ListNode head) {
+        ListNode slow = head;
+        ListNode fast = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if (fast == slow){
+                // 有环
+
+                // fast回到开头
+                fast = head;
+                while (fast != slow){
+                    fast = fast.next;
+                    slow = slow.next;
+                }
+                return fast;
+            }
+        }
+        return null;
+    }
+
+
+    public boolean hasCycle(ListNode head) {
+        ListNode slow = head;
+        ListNode fast = head.next;
+        while (slow != null && fast != null) {
+            if (slow == fast) return true;
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return false;
     }
 
     public boolean wordBreak(String s, List<String> wordDict) {
         // 完全背包问题
         boolean[] dp = new boolean[s.length() + 1];
         dp[0] = true;
-        for (int i = 1; i <= s.length(); i++){
+        for (int i = 1; i <= s.length(); i++) {
             for (int j = 0; j <= i; j++) {
-                if (dp[j] && wordDict.contains(s.substring(j, i))){
+                if (dp[j] && wordDict.contains(s.substring(j, i))) {
                     dp[i] = true;
                 }
             }
@@ -30,7 +60,7 @@ public class t02 {
 
     public int singleNumber(int[] nums) {
         int z = 0;
-        for (int n:nums){
+        for (int n : nums) {
             z ^= n;  // 找出那两个数字
         }
 
@@ -40,7 +70,7 @@ public class t02 {
 
         // 分组的思维
         int t1 = 0, t2 = 0;
-        for (int n:nums){
+        for (int n : nums) {
             if ((n & m) == 1) t1 ^= n;
             else t2 ^= n;
         }
@@ -57,7 +87,7 @@ public class t02 {
 
         int res = 0;
         for (int n : nums) {
-            if (set.remove(n)){
+            if (set.remove(n)) {
                 int curLongest = 1;
                 int curNUm = n;
                 while (set.remove(curNUm - 1)) curNUm--;  // 向左边查找
