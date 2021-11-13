@@ -1,14 +1,14 @@
-package Sort;
+package OutSide.test1;
 
 /**
 
  */
-public class HeapSort {
+public class t11 {
 
     public static void main(String[] args) {
-        HeapSort s = new HeapSort();
-
-        int[] nums = {10,2,12,3,5};
+        t11 s = new t11();
+//        int[] nums = {10,2,12,3,5};
+        int[] nums = {5,3 ,2,1};
         s.heapSort(nums);
 
         // 结果
@@ -19,18 +19,16 @@ public class HeapSort {
 
     void heapSort(int[] nums){
         int size = nums.length;
-        // 定位最后的非叶子节点。因此需要用除法
         for (int i = size / 2 - 1; i >= 0; i--){
             adjust(nums, i, size);
         }
 
-        for (int i = size - 1; i >= 1; i--){  // 注意这里是 >= 1 。 0每次都是被拿出来的
+        for (int i = size - 1; i >= 1; i--){
             swap(nums, 0, i);
             adjust(nums, 0, i);  // 这里的不应再是size，而是i，（因为i才是新的长度
         }
     }
 
-    // 注意这里是vertexIdx
     private void adjust(int[] nums, int vertexIdx, int size) {
         int left = vertexIdx * 2 + 1;
         int right = vertexIdx * 2 + 2;
@@ -39,7 +37,7 @@ public class HeapSort {
         if (right < size && nums[right] > nums[maxIdx]) maxIdx = right;
         if (maxIdx != vertexIdx){
             swap(nums, maxIdx, vertexIdx);
-            adjust(nums, maxIdx, size);  // 递归，将maxIdx作为新的顶点
+            adjust(nums, maxIdx, size);
         }
 
     }
