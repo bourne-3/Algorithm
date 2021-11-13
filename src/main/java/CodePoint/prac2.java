@@ -13,29 +13,26 @@ public class prac2 {
 
     }
 
-    public TreeNode buildTree(int[] preorder, int[] inoreder) {
-        return recur(preorder, 0, preorder.length, inoreder, 0, inoreder.length);
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        return helper(preorder, 0, preorder.length, inorder, 0, inorder.length);  // 左闭右开
     }
 
-    private TreeNode recur(int[] preorder, int pStart, int pEnd, int[] inoreder, int inStart, int inEnd) {
-
+    private TreeNode helper(int[] preorder, int pStart, int pEnd, int[] inorder, int inStart, int inEnd) {
+        // 只有一个节点
         if (pStart == pEnd) return null;
-
-
         int val = preorder[pStart];
+        int inIdx = 0;
 
-        int idx = 0;
         for (int i = 0; i < inEnd; i++) {
-            if (inoreder[i] == val){
-                idx = i;
-            }
+            if (inorder[i] == val) inIdx = i;
         }
 
         TreeNode node = new TreeNode(val);
-        if (pStart - pEnd == 1) return node;
+        if (pEnd - pStart == 1) return node;
 
-        node.left = recur(preorder, pStart + 1, pStart + 1 + idx - inStart, inoreder, inStart, idx);  // inorder instart  idx
-        node.right = recur(preorder, pStart + 1 + idx - inStart, pEnd, inoreder, idx + 1, inEnd);
+        node.left = helper(preorder, pStart + 1, pStart + 1 + inIdx - inStart, inorder, inStart, inIdx);
+        // 这里中序的右子树 需要从inIdx+1开始，因为inIdx已经不考虑了
+        node.right = helper(preorder, pStart + 1 +inIdx - inStart, pEnd, inorder, inIdx + 1, inEnd);
         return node;
     }
 }
