@@ -19,5 +19,13 @@ public class prac1 {
 
     }
 
+    public int findRepeatNumber2(int[] nums) {
+        HashSet<Integer> set = new HashSet<>();
+        for (int n:nums){
+            if (!set.add(n))return n;
+        }
+        return -1;
+    }
+
 
 }
