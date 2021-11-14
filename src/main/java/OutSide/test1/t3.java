@@ -1,39 +1,37 @@
 package OutSide.test1;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
 
  */
 public class t3 {
 
     public static void main(String[] args) {
-        t3 t = new t3();
-        t.letterCombinations("23");
-    }
-    String[] phoneStr = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
-    List<String> res = new ArrayList<>();
-    StringBuilder path = new StringBuilder();
-    public List<String> letterCombinations(String digits) {
-        backtracking(digits, 0);
-        return res;
+
     }
 
-    private void backtracking(String digits, int idx) {
-        if (path.length() == digits.length()){
-            // 结束
-            res.add(path.toString());
-            return;
-        }
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int m = nums1.length;
+        int n = nums2.length;
+        int left = (m + n + 1) / 2;
+        int right = (m + n + 2) / 2;
+        return (findKthNum(nums1, 0, nums2, 0, left) + findKthNum(nums1, 0, nums2, 0, right)) / 2.0;
+    }
 
-        // 取出digits的数字   digits.charAt(idx);
-        // 然后再去列表中找出对应的字母
-        String s = phoneStr[digits.charAt(idx)  - '0'];
-        for (int i = 0; i < s.length(); i++) {
-            path.append(s.charAt(i));
-            backtracking(digits, idx + 1);
-            path.deleteCharAt(path.length() - 1);
+    private double findKthNum(int[] nums1, int i, int[] nums2, int j, int mid) {
+        // i和j表示两个数组的起始位置
+        // 边界条件
+        if (i == 0) return nums2[j + mid];
+        if (j == 0) return nums1[i + mid];
+        if (i == j) return Math.max(nums1[i], nums2[j]);
+
+        // 一般情况
+        int val1 = i + mid / 2 < nums1.length ? nums1[i + mid / 2] : Integer.MAX_VALUE;
+        int val2 = j + mid / 2 < nums2.length ? nums1[j + mid / 2] : Integer.MAX_VALUE;
+
+        if (val1 < val2){
+            return findKthNum(nums1, i + mid / 2 , nums2,j,mid - mid/2);
+        }else {
+            return findKthNum(nums1, i  , nums2,j + mid / 2,mid - mid/2);
         }
     }
 }
