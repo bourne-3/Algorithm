@@ -3,7 +3,7 @@ package CodeTop.Tencent;
 /**
 
  */
-public class prac19 {
+public class prac21 {
 
     public static void main(String[] args) {
 
