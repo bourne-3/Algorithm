@@ -24,8 +24,8 @@ public class prac9 {
 
     private String extend(String s, int start, int end) {
         String tmp = "";
-        while (start >= 0 && end < s.length()) {
-            tmp = tmp.substring(start, end + 1); // 左闭右开，因此需要+1‘
+        while (start >= 0 && end < s.length() && s.charAt(start) == s.charAt(end)) {
+            tmp = s.substring(start, end + 1); // 左闭右开，因此需要+1‘
         }
         return tmp;
     }
