@@ -1,95 +1,62 @@
 package OutSide.test1;
 
-import org.omg.PortableServer.LIFESPAN_POLICY_ID;
-
 /**
 
  */
 public class t02 {
 
     public static void main(String[] args) {
-        multiply("12", "11");
+        int[][] nums = {{0, 0, 0}, {0, 1, 0}, {0, 0, 0}};
+        uniquePathsWithObstacles(nums);
+        t02 t = new t02();
+        t.gcdOfStrings("ABCABC", "ABC");
     }
 
-    public boolean hasCycle(ListNode head) {
-        ListNode fast = head, slow = head;
-        while (fast != null && fast.next != null){
-            fast = fast.next.next;
-            slow = slow.next;
-            if (fast == slow) return true;
-        }
-        return false;
+    public String gcdOfStrings(String str1, String str2) {
+        if (!(str1 + str2).equals(str2 + str1)) return "";
+        return str1.substring(0, helper(str1.length(), str2.length()));
     }
 
-    public int findDuplicate(int[] nums) {
-        int slow = 0, fast = 0;
-
-        slow = nums[slow];
-        fast = nums[nums[fast]];
-        while (fast != slow){
-            // 慢指针走一步
-            slow = nums[slow];
-            fast = nums[nums[fast]];
-        }
-
-        // 找出交叉点 有环，但一定是入口
-        fast = 0;
-        while (fast != slow){
-            fast = nums[fast];
-            slow = nums[slow];
-        }
-        return fast;
+    private int helper(int a, int b) {
+        return b == 0 ? a : helper(b, a % b);
     }
 
 
-    public ListNode swapPairs(ListNode head) {
-        // 两两交换链表中的节点
-        ListNode dump = new ListNode(-1);
-        dump.next = head;
+    public static int uniquePathsWithObstacles(int[][] obstacleGrid) {
+        int m = obstacleGrid.length;
+        int n = obstacleGrid[0].length;
+        int[][] dp = new int[m][n];
+        dp[0][0] = 1;
 
-        ListNode tmp, pre = dump;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (obstacleGrid[i][j] == 1) {
+                    dp[i][j] = 0;
+                }else {
+                    if (i == 0 && j == 0) continue;
+                    else if (i == 0) dp[i][j] = dp[i][j-1];
+                    else if (j == 0) dp[i][j] = dp[i-1][j];
+//                    else dp[i][j] += dp[i-1][j] + dp[i][j-1];
+                    else dp[i][j] = Math.min (dp[i-1][j],dp[i][j-1]);;
+                }
 
-        while (pre.next != null && pre.next.next != null){
-            tmp = head.next.next;
-            // 三步
-            pre.next = head.next;
-            pre.next.next = head;
-            head.next = tmp;
-
-            // 移动指针
-            pre = head;
-            head = tmp;
-        }
-        return dump.next;
-    }
-
-
-    public static String multiply(String num1, String num2) {
-        int n1 = num1.length() - 1;
-        int n2 = num2.length() - 1;
-        if (n1 < 0 || n2 < 0) return "";
-        int[] mul = new int[n1 + n2 + 2];
-        for (int i = n1; i >= 0; i--){
-            for (int j = n2; j >= 0; j--){
-                // 从后面到前面
-                int bitmul = (num1.charAt(i) - '0') * (num2.charAt(j) - '0');
-                // [i + j,  i + j + 1]  // 放到这个位置上
-                // 如果这个位置上有数字就累加，因此用+=
-                bitmul += mul[i + j + 1];
-
-                // 放到数组中，上面还没放到数组中
-                mul[i + j] += bitmul / 10;
-                // 注意这里是=
-                mul[i + j + 1] = bitmul % 10;
             }
         }
-        // 去掉0开头
-        StringBuilder path = new StringBuilder();
-        int i = 0;
-        while (i < mul.length - 1 && mul[i] == 0) i++;
-        for (; i < mul.length; i++){
-            path.append(mul[i]);
+        return dp[m-1][n-1];
+    }
+
+
+    public int uniquePaths(int m, int n) {
+        int[][] dp = new int[m][n];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i == 0 && j == 0) continue;
+                else if (i == 0) dp[i][j] += dp[i][j - 1];
+                else if (j == 0) dp[i][j] += dp[i - 1][j];
+                else dp[i][j] += dp[i-1][j] + dp[i][j-1];
+            }
         }
-        return path.toString();
+        return dp[m-1][n-1];
+
     }
 }

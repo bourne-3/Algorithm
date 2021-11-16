@@ -1,7 +1,6 @@
 package OutSide.test1;
 
-import java.util.Deque;
-import java.util.LinkedList;
+import java.util.PriorityQueue;
 
 /**
 
@@ -9,31 +8,36 @@ import java.util.LinkedList;
 public class t03 {
 
     public static void main(String[] args) {
+        int[] nums = {4, 5, 8, 2};
+        t03 t = new t03(3, nums);
+        System.out.println(t.add(3));  // 4
+        System.out.println(t.add(5));  //  5
+        System.out.println(t.add(10));  //  5
+        System.out.println(t.add(9));  //  8
+        System.out.println(t.add(4));  //  8
 
     }
-    Deque<Integer> in;
-    Deque<Integer> out;
-    public t03() {
-        in = new LinkedList<>();
-        out = new LinkedList<>();
+    // 使用优先级队列
+    PriorityQueue<Integer> q;
+    int k;
+    public t03(int k, int[] nums) {
+        this.q = new PriorityQueue<>(k);
+        this.k = k;
+        // 入队
+        for (int n :nums){
+            add(n);
+        }
+
     }
 
-    public void push(int val) {
-        in.push(val);
-        if (out.isEmpty() || val <= out.peek()) out.push(val);
-    }
-
-    public void pop() {
-        if (in.pop().equals(out.peek())) out.pop();
-    }
-
-    public int top() {
-        if (in.isEmpty()) return -1;
-        return in.peek();
-    }
-
-    public int getMin() {
-        if (out.isEmpty()) return -1;
-        return out.peek();
+    public int add(int val) {
+        if (q.size() < k){
+            q.offer(val);
+        }else if (val > q.peek()){
+            q.poll();
+            q.offer(val);
+        }
+        if (q.isEmpty()) return -1;
+        return q.peek();
     }
 }
