@@ -13,3 +13,6 @@ https://www.zhihu.com/question/30461290/answer/210414739
 11.21
     1 早上在宿舍看了一下prompt的survey，现在回来继续看论文，下午开始写一点开题报告。要蹭着小罗在学校，赶紧相想出一个模型图
     然后把模型图给画一下
+    
+    2 github的access token
+    ：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
