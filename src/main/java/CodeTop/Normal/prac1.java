@@ -1,7 +1,7 @@
 package CodeTop.Normal;
 
 /**
-    注意公式  (rand7() - 1 ) * 7 + rand7();
+    codeTop 每天一道
  */
 public class prac1 {
 
@@ -9,20 +9,17 @@ public class prac1 {
 
     }
 
-    public int rand10() {
-        while(true){
-            int num = (rand7() - 1) * 7 + rand7();  //49
-            if (num <= 40) return 1 + num% 10;
-            // 剩余的41 - 49
-            num =  (num - 40 - 1) * 7 + rand7();  // 63
-            if (num <= 60) return 1 + num% 10;
-            // 61-63
-            num = (num - 60 - 1) * 7 + rand7();  // 21
-            if (num <= 20) return 1 + num% 10;
-        }
-    }
+    public ListNode reverseList(ListNode head) {
+        // 反转链表 三个指针
+        ListNode cur = head, pre = null, next;
+        while (cur != null){
+            next = cur.next;
+            cur.next = pre;
 
-    public int rand7() {
-        return -1;
+            pre = cur;
+            cur = next;
+        }
+
+        return pre;
     }
 }
